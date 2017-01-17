@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .padding-15
+    .login-box
+      form.sky-form.boxed(action='index.html', method='post')
+        header
+          i.fa.fa-users
+          |  Forgot Password
+        fieldset
+          label.label E-mail
+          label.input
+            i.icon-append.fa.fa-envelope
+            input(type='email')
+            span.tooltip.tooltip-top-right Type your Email
+          a(href='/login') Back to Login
+        footer
+          button.btn.btn-primary.pull-right(type='submit')
+            i.glyphicon.glyphicon-refresh
+            |  Reset Passsword
+      .alert.alert-default.noradius
+        | The reset link will be sent to your email address. Click the link and reset your account password.

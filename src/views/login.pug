@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  .padding-15
+    .login-box
+      form.sky-form.boxed
+        header
+          i.fa.fa-users
+          |  Sign In
+        fieldset
+          section
+            label.label E-mail
+            label.input
+              i.icon-append.fa.fa-envelope
+              input(type='email')
+              span.tooltip.tooltip-top-right Email Address
+          section
+            label.label Password
+            label.input
+              i.icon-append.fa.fa-lock
+              input(type='password')
+              b.tooltip.tooltip-top-right Type your Password
+          .margin-top20
+            label.checkbox.nomargin
+              input(type='checkbox', name='checkbox', checked)
+              i
+              | Keep me logged in
+        footer
+          button.btn.btn-primary.pull-right(type='submit') Sign In
+          .forgot-password.pull-left
+            a(href='/forgot') Forgot password?
+            br
+            a(href='/register')
+              b Need to Register?
+      hr
+      .text-center  Or sign in using:
+      .socials.margin-top-10.text-center
+        a.btn.btn-google(href='#')
+          i.fa.fa-google
+          |  Google
+        | &nbsp;
+        a.btn.btn-facebook(href='#')
+          i.fa.fa-facebook
+          |  Facebook
+        | &nbsp;
+        a.btn.btn-twitter(href='#')
+          i.fa.fa-twitter
+          |  Twitter

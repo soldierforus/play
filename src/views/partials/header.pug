@@ -1,0 +1,38 @@
+header#header
+  button#mobileMenuBtn
+  span.logo.pull-left
+    img(src='assets/images/logo_light.png', alt='admin panel', height='35')
+  form.search.pull-right.hidden-xs(method='get', action='page-search.html')
+    input.form-control(type='text', name='k', placeholder='Search for something...')
+  nav
+    ul.nav.pull-right
+      li.dropdown.pull-left
+        a.dropdown-toggle(href='#', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
+          img.user-avatar(alt='', src='assets/images/noavatar.jpg', height='34')
+          span.user-name
+            span.hidden-xs
+              | John Doe
+              i.fa.fa-angle-down
+        ul.dropdown-menu.hold-on-click
+          li
+            a(href='calendar.html')
+              i.fa.fa-calendar
+              |  Calendar
+          li
+            a(href='#')
+              i.fa.fa-envelope
+              |  Inbox
+              span.pull-right.label.label-default 0
+          li
+            a(href='page-user-profile.html')
+              i.fa.fa-cogs
+              |  Settings
+          li.divider
+          li
+            a(href='page-lock.html')
+              i.fa.fa-lock
+              |  Lock Screen
+          li
+            a(href='page-login.html')
+              i.fa.fa-power-off
+              |  Log Out

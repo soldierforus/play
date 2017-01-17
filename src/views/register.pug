@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  .padding-15
+    .login-box
+      form.sky-form.boxed
+        header
+          i.fa.fa-users
+          |  Register
+        fieldset
+          section
+            label.label E-mail
+            label.input
+              i.icon-append.fa.fa-envelope
+              input(type='email')
+              span.tooltip.tooltip-top-right Email Address
+          section
+            label.label Password
+            label.input
+              i.icon-append.fa.fa-lock
+              input(type='password')
+              b.tooltip.tooltip-top-right Type your Password
+          .margin-top20
+            label.checkbox.nomargin
+              input.checked-agree(type='checkbox', name='checkbox')
+              i
+              | I agree to the
+              a(href='//chesmsbl.org/terms', target='_blank')  Terms of Service
+            label.checkbox.nomargin
+              input(type='checkbox', name='checkbox')
+              i
+              | Send me occasional league news
+        footer
+          button.btn.btn-primary.pull-right(type='submit')
+            i.fa.fa-check
+            |  Register
+          .forgot-password.pull-left
+            a(href='/login'): b Already have an account?
+      hr
+      .text-center  Or sign up using:
+      .socials.margin-top-10.text-center
+        a.btn.btn-google(href='#')
+          i.fa.fa-google
+          |  Google
+        | &nbsp;
+        a.btn.btn-facebook(href='#')
+          i.fa.fa-facebook
+          |  Facebook
+        | &nbsp;
+        a.btn.btn-twitter(href='#')
+          i.fa.fa-twitter
+          |  Twitter

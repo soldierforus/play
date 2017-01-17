@@ -1,0 +1,30 @@
+machine:
+  node:
+    version: 6
+  environment:
+    YARN_VERSION: 0.18.1
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+    AUTH0_CALLBACK_URL: "https://chesmsbl.org/auth/callback"
+    AUTH0_DOMAIN: "chesmsbl.auth0.com"
+    DATABASE_URL: "postgres://ubuntu:@127.0.0.1:5432/circle_test"
+    REDIS_URL: "redis://localhost:6379"
+    SESSION_SECRET: "circleci"
+    NEW_RELIC_APP_NAME: "play-chesmsbl-org"
+    NEW_RELIC_LOG: "stdout"
+    NEW_RELIC_NO_CONFIG_FILE: true
+  services:
+    - redis
+dependencies:
+  pre:
+    - |
+      if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+      fi
+  cache_directories:
+    - ~/.yarn
+    - ~/.cache/yarn
+  override:
+    - yarn install
+test:
+  override:
+    - yarn test

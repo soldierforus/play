@@ -1,0 +1,27 @@
+script.
+  $(document).ready(function() {
+    var messages = "#{JSON.stringify(messages)}";
+    messages = messages.replace(/&quot;/g, '"');
+    messages = JSON.parse(messages);
+
+    if (!messages)
+      return;
+
+    if (messages.errors) {
+      for (error in messages.errors) {
+        _toastr(messages.errors[error].msg, "top-right", "error", false);
+      }
+    }
+
+    if (messages.info) {
+      for (info in messages.info) {
+        _toastr(messages.info[info].msg, "top-right", "info", false);
+      }
+    }
+
+    if (messages.success) {
+      for (success in messages.success) {
+        _toastr(messages.success[success].msg, "top-right", "success", false);
+      }
+    }
+  });

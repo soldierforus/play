@@ -1,0 +1,47 @@
+{
+  "name": "Play",
+  "description": "The player and manager application for Chesapeake Men's Senior Baseball League at https://play.chesmsbl.org",
+  "keywords": [
+    "baseball"
+  ],
+  "website": "https://play.chesmbl.org/",
+  "repository": "https://github.com/chesmsbl/play",
+  "logo": "https://chesmsbl.org/logo.png",
+  "success_url": "/login",
+  "env": {
+    "SESSION_SECRET": {
+      "description": "A secret for identifying valid sessions.",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
+  "image": "heroku/nodejs",
+  "addons": [
+    {
+      "plan": "auth0:free"
+    }, {
+      "plan": "heroku-postgresql:hobby-dev",
+      "options": {
+        "version": "9.6.1"
+      }
+    }, {
+      "plan": "newrelic:wayne"
+    }, {
+      "plan": "papertrail:choklad"
+    }, {
+      "plan": "heroku-redis:hobby-dev"
+    }, {
+      "plan": "rollbar:free"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs#v91"
+    }
+  ]
+}
