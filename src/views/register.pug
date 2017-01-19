@@ -3,31 +3,32 @@ extends layout
 block content
   .padding-15
     .login-box
-      form.sky-form.boxed
-        header
+      form#register.sky-form.boxed(role="form" data-toggle="validator")
+        header.size-18
           i.fa.fa-users
           |  Register
-        fieldset
-          section
+        fieldset.nomargin
+          .form-group
             label.label E-mail
             label.input
               i.icon-append.fa.fa-envelope
-              input(type='email')
-              span.tooltip.tooltip-top-right Email Address
-          section
+              input#email(required type='email')
+              div.help-block.with-errors
+          .form-group
             label.label Password
             label.input
               i.icon-append.fa.fa-lock
-              input(type='password')
-              b.tooltip.tooltip-top-right Type your Password
-          .margin-top20
+              input#password(required type='password')
+              div.help-block.with-errors
+          .form-group.margin-top20
             label.checkbox.nomargin
-              input.checked-agree(type='checkbox', name='checkbox')
+              input.checked-agree(required type='checkbox', name='terms')
               i
               | I agree to the
               a(href='//chesmsbl.org/terms', target='_blank')  Terms of Service
+              div.help-block.with-errors
             label.checkbox.nomargin
-              input(type='checkbox', name='checkbox')
+              input(type='checkbox', name='newsletter')
               i
               | Send me occasional league news
         footer
@@ -36,17 +37,50 @@ block content
             |  Register
           .forgot-password.pull-left
             a(href='/login'): b Already have an account?
-      hr
-      .text-center  Or sign up using:
-      .socials.margin-top-10.text-center
-        a.btn.btn-google(href='#')
-          i.fa.fa-google
-          |  Google
-        | &nbsp;
-        a.btn.btn-facebook(href='#')
-          i.fa.fa-facebook
-          |  Facebook
-        | &nbsp;
-        a.btn.btn-twitter(href='#')
-          i.fa.fa-twitter
-          |  Twitter
+      .alert-container
+      if social
+        hr
+        .text-center  Or sign up using:
+        .socials.margin-top-10.text-center
+          a.btn.btn-google(href='#')
+            i.fa.fa-google
+            |  Google
+          | &nbsp;
+          a.btn.btn-facebook(href='#')
+            i.fa.fa-facebook
+            |  Facebook
+          | &nbsp;
+          a.btn.btn-twitter(href='#')
+            i.fa.fa-twitter
+            |  Twitter
+
+block scripts
+  script.
+    var auth0 = new Auth0({
+      domain: '#{AUTH0_DOMAIN}',
+      clientID: '#{AUTH0_CLIENT_ID}',
+      callbackURL: '#{AUTH0_CALLBACK_URL}',
+    });
+
+    $(document).ready(function() {
+      $('#register').validator().on('submit', function register(e) {
+        if (!e.isDefaultPrevented()) {
+          e.preventDefault();
+          auth0.signup({
+            connection: 'Username-Password-Authentication',
+            username:   $('#email').val(),
+            password:   $('#password').val(),
+            sso: true,
+            popup: true,
+            auto_login: false
+          }, (err) => {
+            if (err) {
+              console.log(JSON.stringify(err, null, 4));
+              $('.alert-container').append('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p><strong>Uh oh!</strong></p><p>Sorry, a user with that email already exists.</p></div>')
+            } else {
+              $('.alert-container').append('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p><strong>Thank you!</strong></p><p>Please check your email for further instructions.</p></div>')
+            }
+          });
+        }
+      });
+    });

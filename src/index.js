@@ -18,10 +18,10 @@ const flash = require('express-flash');
 const passport = require('passport');
 const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
-const multer = require('multer');
+// const multer = require('multer');
 const rollbar = require('rollbar');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+// const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -123,7 +123,7 @@ app.get('/auth/callback', passport.authenticate('auth0', { failureRedirect: '/lo
   if (!req.user) {
     throw new Error('user null');
   }
-  console.log(req.user);
+
   res.redirect('/dashboard');
 });
 
@@ -137,7 +137,7 @@ app.get('/.well-known/acme-challenge/:acmeToken', (req, res) => {
     }
   }
 
-  for (const key in process.env) {
+  for (const key in process.env) { // eslint-disable-line no-restricted-syntax
     if (key.startsWith('ACME_TOKEN_')) {
       const num = key.split('ACME_TOKEN_')[1];
       if (acmeToken === process.env[`ACME_TOKEN_${num}`]) {
