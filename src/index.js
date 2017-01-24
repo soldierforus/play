@@ -4,7 +4,7 @@
  */
 const path = require('path');
 
-const dotenv = require('dotenv');
+const rollbar = require('rollbar');
 const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
@@ -18,20 +18,18 @@ const flash = require('express-flash');
 const passport = require('passport');
 const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
-// const multer = require('multer');
-const rollbar = require('rollbar');
 
+const routes = require('./routes');
+
+// const multer = require('multer');
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
-dotenv.config({ silent: true });
-
-/**
- * API keys and Passport configuration.
- */
-require('./config/passport');
+if (process.env.NODE_ENV !== 'development') {
+  rollbar.init(process.env.ROLLBAR_ACCESS_TOKEN, {
+    environment: process.env.NODE_ENV,
+    endpoint: process.env.ROLLBAR_ENDPOINT,
+  });
+}
 
 /**
  * Create Express server.
@@ -47,14 +45,6 @@ app.locals.env = process.env;
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-// Redirect HTTP to HTTPS
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(`https://${req.hostname}${req.originalUrl}`);
-  }
-  next();
-});
 
 /**
  * Express middleware..
@@ -98,61 +88,20 @@ app.use((req, res, next) => {
       !req.path.match(/^\/auth/) &&
       !req.path.match(/\./)) {
     req.session.returnTo = req.path;
-  } else if (req.user &&
-      req.path === '/dashboard') {
+  } else if (req.user && req.path === '/dashboard') {
     req.session.returnTo = req.path;
   }
   next();
 });
 app.use(express.static(path.join(process.cwd(), 'public'), { maxAge: 31557600000 }));
 
-const loginCtlr = require('./controllers/login');
-const registerCtlr = require('./controllers/register');
-const forgotCtlr = require('./controllers/forgot');
-const dashboardCtlr = require('./controllers/dashboard');
+const isAuthenticated = require('./config/passport').isAuthenticated;
 
 /**
  * Primary app routes.
  */
-app.get('/login', loginCtlr.get);
-app.get('/register', registerCtlr.get);
-app.get('/forgot', forgotCtlr.get);
-app.get('/dashboard', dashboardCtlr.get);
-
-app.get('/auth/callback', passport.authenticate('auth0', { failureRedirect: '/login' }), (req, res) => {
-  if (!req.user) {
-    throw new Error('user null');
-  }
-
-  res.redirect('/dashboard');
-});
-
-app.get('/.well-known/acme-challenge/:acmeToken', (req, res) => {
-  const acmeToken = req.params.acmeToken;
-  let acmeKey;
-
-  if (process.env.ACME_KEY && process.env.ACME_TOKEN) {
-    if (acmeToken === process.env.ACME_TOKEN) {
-      acmeKey = process.env.ACME_KEY;
-    }
-  }
-
-  for (const key in process.env) { // eslint-disable-line no-restricted-syntax
-    if (key.startsWith('ACME_TOKEN_')) {
-      const num = key.split('ACME_TOKEN_')[1];
-      if (acmeToken === process.env[`ACME_TOKEN_${num}`]) {
-        acmeKey = process.env[`ACME_KEY_${num}`];
-      }
-    }
-  }
-
-  if (acmeKey) res.send(acmeKey);
-  else res.status(404).send();
-});
-
-app.get('*', (req, res) => {
-  res.redirect('/login');
-});
+app.use('/', routes);
+app.get('/teams/create', isAuthenticated, require('./controllers/teams').get);
 
 /**
  * Error Handler.

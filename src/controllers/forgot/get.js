@@ -1,8 +1,4 @@
-/**
- * GET /login
- * Login page.
- */
-exports.get = (req, res) => {
+module.exports = (req, res) => {
   res.render('forgot', {
     title: 'Forgot Password',
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,

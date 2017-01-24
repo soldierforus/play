@@ -1,0 +1,29 @@
+extends ../dashboard
+
+block content
+  #create.panel.panel-default
+    .panel-heading
+      span.title.elipsis Create a Team
+      ul.options.pull-right.list-inline
+        li: a.opt.panel_fullscreen.hidden-xs(title data-toggle="tooltip" data-placement="bottom" data-original-title="Fullscreen")
+          i.fa.fa-expand
+    .panel-body
+      form.validate
+      fieldset
+        .row
+          .form-group
+            .col-md-6.col-sm-6
+              label Team Name *
+              input.form-control.required(type='text', name='team_name', value='')
+            .col-md-6.col-sm-6
+              label Age Group *
+              select.form-control.pointer.required(name='age_group')
+                option(value='') --- Select ---
+                option(value='18') 18+
+                option(value='25') 25+
+                option(value='35') 35+
+                option(value='45') 45+
+      .row
+        .col-md-12.text-right
+          button.btn.btn-3d.btn-success.btn-lg.margin-top-30(type='submit')
+            | Create

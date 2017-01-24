@@ -1,8 +1,4 @@
-/**
- * GET /register
- * Registration page.
- */
-exports.get = (req, res) => {
+module.exports = (req, res) => {
   if (req.user) {
     req.flash('info', { msg: `${req.user.email} already registered.` });
     return res.redirect('/dashboard');

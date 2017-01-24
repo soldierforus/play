@@ -1,17 +1,17 @@
 header#header
   button#mobileMenuBtn
-  span.logo.pull-left
-    img(src='assets/images/logo_light.png', alt='admin panel', height='35')
-  form.search.pull-right.hidden-xs(method='get', action='page-search.html')
-    input.form-control(type='text', name='k', placeholder='Search for something...')
+  span.logo.pull-left.hidden-xs.hidden-md
+    img(src='/assets/images/logo-dashboard-full.png', alt='Chesapeake Men\'s Senior Baseball League, Inc.', height='35').margin-top-6
+  span.logo.pull-left.hidden-lg.hidden-xl
+    img(src='/assets/images/logo-dashboard-short.png', alt='Chesapeake Men\'s Senior Baseball League, Inc.', height='35').margin-top-6
   nav
     ul.nav.pull-right
       li.dropdown.pull-left
         a.dropdown-toggle(href='#', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
-          img.user-avatar(alt='', src='assets/images/noavatar.jpg', height='34')
+          img.user-avatar(alt='', src=user.picture, height='34')
           span.user-name
             span.hidden-xs
-              | John Doe
+              = user.name
               i.fa.fa-angle-down
         ul.dropdown-menu.hold-on-click
           li
@@ -33,6 +33,6 @@ header#header
               i.fa.fa-lock
               |  Lock Screen
           li
-            a(href='page-login.html')
+            a(href='/logout')
               i.fa.fa-power-off
               |  Log Out

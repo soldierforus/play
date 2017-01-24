@@ -1,5 +1,12 @@
 extends ../dashboard
 
 block content
-  .panel.panel-default
-    p Testing
+  #new.panel.panel-default
+    .panel-heading
+      span.title.elipsis The New Kid in Town
+      ul.options.pull-right.list-inline
+        li: a.opt.panel_fullscreen.hidden-xs(title data-toggle="tooltip" data-placement="bottom" data-original-title="Fullscreen")
+          i.fa.fa-expand
+    .panel-body
+      p You're not a member of any teams! Let's fix that!
+      p: a.btn.btn-success(href='/teams/create') Create a Team

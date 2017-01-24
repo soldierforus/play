@@ -3,7 +3,7 @@ extends layout
 block content
   .padding-15
     .login-box
-      form.sky-form.boxed
+      form#login.sky-form.boxed
         header
           i.fa.fa-users
           |  Sign In
@@ -12,13 +12,13 @@ block content
             label.label E-mail
             label.input
               i.icon-append.fa.fa-envelope
-              input(type='email')
+              input#email(type='email')
               span.tooltip.tooltip-top-right Email Address
           section
             label.label Password
             label.input
               i.icon-append.fa.fa-lock
-              input(type='password')
+              input#password(type='password')
               b.tooltip.tooltip-top-right Type your Password
           .margin-top20
             label.checkbox.nomargin
@@ -32,17 +32,45 @@ block content
             br
             a(href='/register')
               b Need to Register?
-      hr
-      .text-center  Or sign in using:
-      .socials.margin-top-10.text-center
-        a.btn.btn-google(href='#')
-          i.fa.fa-google
-          |  Google
-        | &nbsp;
-        a.btn.btn-facebook(href='#')
-          i.fa.fa-facebook
-          |  Facebook
-        | &nbsp;
-        a.btn.btn-twitter(href='#')
-          i.fa.fa-twitter
-          |  Twitter
+      if social
+        hr
+        .text-center  Or sign in using:
+        .socials.margin-top-10.text-center
+          a#google-signin.btn.btn-google(href='#')
+            i.fa.fa-google
+            |  Google
+          | &nbsp;
+          a#facebook-signin.btn.btn-facebook(href='#')
+            i.fa.fa-facebook
+            |  Facebook
+          | &nbsp;
+          a#twitter-signin.btn.btn-twitter(href='#')
+            i.fa.fa-twitter
+            |  Twitter
+    .container
+      .row
+        .col-xs-12.text-center
+          span.font-lato.size-16.margin-right-6 Supported by
+          a(width='150', height='50', href='https://auth0.com/?utm_source=oss&utm_medium=gp&utm_campaign=oss', target='_blank', alt='Single Sign On & Token Based Authentication - Auth0')
+            img(width='150', height='50', alt='JWT Auth for open source projects', src='//cdn.auth0.com/oss/badges/a0-badge-dark.png')
+
+block scripts
+  script.
+    var auth0 = new Auth0({
+      domain: '#{AUTH0_DOMAIN}',
+      clientID: '#{AUTH0_CLIENT_ID}',
+      callbackURL: '#{AUTH0_CALLBACK_URL}',
+    });
+
+    $(document).ready(function() {
+      $('#login').validator().on('submit', function register(e) {
+        if (!e.isDefaultPrevented()) {
+          e.preventDefault();
+          auth0.login({
+           connection: 'Username-Password-Authentication',
+           username:   $('#email').val(),
+           password:   $('#password').val(),
+          });
+        }
+      });
+    });
