@@ -323,9 +323,9 @@ bluebird@2.10.2:
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
 
-bluebird@3.4.x, bluebird@^3.0.1, bluebird@^3.0.5, bluebird@^3.3.4, bluebird@^3.4.5, bluebird@^3.4.6:
+bluebird@3.4.x, bluebird@^3.0.1, bluebird@^3.0.5, bluebird@^3.3.4, bluebird@^3.4.5, bluebird@^3.4.6, bluebird@^3.4.7:
   version "3.4.7"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
+  resolved "https://artifacts.ua-ecm.com:443/artifactory/api/npm/ua-npm-master/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
 bluebird@^2.10.2:
   version "2.11.0"
@@ -3027,9 +3027,9 @@ moment-timezone@^0.5.4:
   dependencies:
     moment ">= 2.6.0"
 
-"moment@>= 2.6.0", moment@^2.13.0, moment@^2.15.1, moment@^2.8.3:
+"moment@>= 2.6.0", moment@^2.13.0, moment@^2.15.1, moment@^2.17.1, moment@^2.8.3:
   version "2.17.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
+  resolved "https://artifacts.ua-ecm.com:443/artifactory/api/npm/ua-npm-master/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
 mongodb-core@2.1.2:
   version "2.1.2"

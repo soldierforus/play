@@ -1,12 +1,25 @@
 extends ../dashboard
 
 block content
-  #new.panel.panel-default
-    .panel-heading
-      span.title.elipsis The New Kid in Town
-      ul.options.pull-right.list-inline
-        li: a.opt.panel_fullscreen.hidden-xs(title data-toggle="tooltip" data-placement="bottom" data-original-title="Fullscreen")
-          i.fa.fa-expand
-    .panel-body
-      p You're not a member of any teams! Let's fix that!
-      p: a.btn.btn-success(href='/teams/create') Create a Team
+  .row
+    .col-md-8
+      .panel.panel-default
+        .panel-heading
+          span.title.elipsis Welcome to Chesapeake Men's Senior Baseball League
+          ul.options.pull-right.list-inline
+            li: a.opt.panel_fullscreen.hidden-xs(title data-toggle="tooltip" data-placement="bottom" data-original-title="Fullscreen")
+              i.fa.fa-expand
+        .panel-body
+          h3 Thank you!
+          p You've made it into our new web experience. Please be mindful of the dust and debris that might still be around. Our new web site is still under very active development. Things might change drastically and move around unexepectedly. We'll do our best to ensure we provide timely updates to any bugs you might find.
+          p If you have any issues with site functionality or have any ideas on how we can improve the experience, please click the yellow chat bubble in the bottom right of the screen and just start typing. In general, there is likely someone online who can respond to you immediately, however, please allow up to 36 hours for us to respond to any messages.
+    .col-md-4
+      .panel.panel-default
+          .panel-heading
+            span.title.elipsis My Teams
+          .panel-body
+            h3 Oh no!
+            p.text-center You aren't part of any teams, yet.
+            p.text-center
+              a.btn.btn-success.margin-right-8(href='/teams/join') Join a Team
+              a.btn.btn-warning.margin-right-8(href='/teams/create') Create a Team

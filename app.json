@@ -6,7 +6,7 @@
   ],
   "website": "https://play.chesmbl.org/",
   "repository": "https://github.com/chesmsbl/play",
-  "logo": "https://chesmsbl.org/logo.png",
+  "logo": "https://chesmsbl.org/img/logo-120.png",
   "success_url": "/login",
   "env": {
     "SESSION_SECRET": {
@@ -23,20 +23,14 @@
   "image": "heroku/nodejs",
   "addons": [
     {
-      "plan": "auth0:free"
-    }, {
       "plan": "heroku-postgresql:hobby-dev",
       "options": {
         "version": "9.6"
       }
     }, {
-      "plan": "newrelic:wayne"
-    }, {
       "plan": "papertrail:choklad"
     }, {
       "plan": "heroku-redis:hobby-dev"
-    }, {
-      "plan": "rollbar:free"
     }
   ],
   "buildpacks": [

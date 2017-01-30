@@ -5,39 +5,39 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       user_id: {
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(30),
       },
       firstName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       lastName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       birthdate: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATEONLY,
       },
       raw: {
-        type: Sequelize.JSONB
+        type: Sequelize.JSONB,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       deletedAt: {
         allowNull: true,
-        type: Sequelize.DATE
-      }
-    }
+        type: Sequelize.DATE,
+      },
+    },
   )),
   down: queryInterface => queryInterface.dropTable('Users'),
 };
