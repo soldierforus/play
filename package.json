@@ -18,7 +18,7 @@
     "node": "6"
   },
   "dependencies": {
-    "async": "^2.1.2",
+    "async": "^2.6.4",
     "auth0-js": "7.6.1",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.15.2",
